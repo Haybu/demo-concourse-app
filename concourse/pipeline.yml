@@ -1,12 +1,12 @@
 resources:
-- name: resource-demo-concourse-app
-  type: git
-  source:
+  - name: resource-git
+    type: git
+    source:
       uri: {{github-uri}}
       branch: {{github-branch}}
-- name: staging-app
-  type: cf
-  source:
+  - name: resource-cf
+    type: cf
+    source:
       api: {{cf-api}}
       username: {{cf-username}}
       password: {{cf-password}}
@@ -15,12 +15,12 @@ resources:
       skip_cert_check: true
 
 jobs:
-- name: test-app
-  plan:
-  - get: resource-demo-concourse-app
-    trigger: true
-  - task: tests
-    file: resource-demo-concourse-app/concourse/tasks/build.yml
-  - put: staging-app
-    params:
-      manifest: resource-demo-concourse-app/manifest.yml
+  - name: package-job
+    plan:
+      - get: resource-git
+        trigger: true
+      - task: package-task
+        file: resource-git/concourse/build.yml
+      - put: resource-cf
+        params:
+          manifest: resource-git/manifest.yml

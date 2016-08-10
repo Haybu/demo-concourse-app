@@ -1,0 +1,8 @@
+github-uri: https://github.com/Haybu/demo-concourse-app.git
+github-branch: master
+cf-api: https://api.local.pcfdev.io
+cf-username: admin
+cf-password: admin
+cf-org: pcfdev-org
+cf-space: pcfdev-space
+cf-manifest-host: concourse-demo

@@ -1,0 +1,4 @@
+name: concourse-demo
+memory: 128M
+random-route: flase
+path: .
