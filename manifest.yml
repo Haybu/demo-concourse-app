@@ -1,4 +1,4 @@
 name: concourse-demo
 memory: 128M
 random-route: flase
-path: ./target/demo-concourse-app-0.0.1-SNAPSHOT.jar
+path: resource-app/target/demo-concourse-app-0.0.1-SNAPSHOT.jar
