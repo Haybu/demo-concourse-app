@@ -1,0 +1,26 @@
+resources:
+- name: resource-demo-concourse-app
+  type: git
+  source:
+      uri: {{github-uri}}
+      branch: {{github-branch}}
+- name: staging-app
+  type: cf
+  source:
+      api: {{cf-api}}
+      username: {{cf-username}}
+      password: {{cf-password}}
+      organization: {{cf-org}}
+      space: {{cf-space}}
+      skip_cert_check: true
+
+jobs:
+- name: test-app
+  plan:
+  - get: resource-demo-concourse-app
+    trigger: true
+  - task: tests
+    file: resource-demo-concourse-app/concourse/tasks/build.yml
+  - put: staging-app
+    params:
+      manifest: resource-demo-concourse-app/manifest.yml
